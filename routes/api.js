@@ -8,6 +8,35 @@ const router = require("express").Router();
 const path = require("path");
 const Workout = require("../models/workout")
 
+// db.scores.aggregate( [
+//   {
+//     $addFields: {
+//       totalHomework: { $sum: "$homework" } ,
+//       totalQuiz: { $sum: "$quiz" }
+//     }
+//   },
+//   {
+//     $addFields: { totalScore:
+//       { $add: [ "$totalHomework", "$totalQuiz", "$extraCredit" ] } }
+//   }
+// ] )
+
+router.get("/api/workouts", (req, res) => {
+Workout.aggregate([
+  {
+    $addFields: {
+      totalduration: { $sum: "$workout" }
+    },
+  },
+])
+.then(dbWorkout => {
+  res.json(dbWorkout);
+})
+.catch(err => {
+  res.status(400).json(err);
+});
+})
+
 router.get("/api/workouts", (req, res) => {
   Workout.find({})
     .sort({ date: -1 })
@@ -73,6 +102,7 @@ router.get("/stats", (req, res) => {
 
 router.delete("/api/workouts", (req, res) => {
   res.end('Deleting workouts:' + req.params.id)
+
 });
 
 module.exports = router;
