@@ -10,7 +10,7 @@ const Workout = require("../models/workout")
 
 router.get("/api/workouts", (req, res) => {
   Workout.find({})
-    // .sort({ date: -1 })
+    .sort({ date: -1 })
     .then(dbWorkout => {
       res.json(dbWorkout);
     })
@@ -72,7 +72,7 @@ router.get("/stats", (req, res) => {
 });
 
 router.delete("/api/workouts", (req, res) => {
-  res.end('Deleting Workout:' + req.params.id)
+  res.end('Deleting workouts:' + req.params.id)
 });
 
 module.exports = router;
