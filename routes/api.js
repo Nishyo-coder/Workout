@@ -25,7 +25,7 @@ router.get("/api/workouts", (req, res) => {
 Workout.aggregate([
   {
     $addFields: {
-      totalduration: { $sum: "$workout" }
+      totalDuration: { $sum: "$exercises.duration" }
     },
   },
 ])
@@ -37,16 +37,33 @@ Workout.aggregate([
 });
 })
 
-router.get("/api/workouts", (req, res) => {
-  Workout.find({})
-    .sort({ date: -1 })
-    .then(dbWorkout => {
-      res.json(dbWorkout);
-    })
-    .catch(err => {
-      res.status(400).json(err);
-    });
-});
+// router.get("/api/workouts", (req, res) => {
+//   Workout.find({})
+//     .sort({ date: -1 })
+//     .then(dbWorkout => {
+//       res.json(dbWorkout);
+//     })
+//     .catch(err => {
+//       res.status(400).json(err);
+//     });
+// });
+
+// GET http://localhost:3000/api/workouts/range 404 (Not Found)
+router.get("/api/workouts/range", (req, res) => {
+  Workout.aggregate([
+    {
+      $addFields: {
+        totalWeight: { $sum: "$exercises.weight" }
+      },
+    },
+  ])
+  .then(dbWorkout => {
+    res.json(dbWorkout);
+  })
+  .catch(err => {
+    res.status(400).json(err);
+  });
+  })
 
 
 router.post("/api/workouts", ({ body }, res) => {
