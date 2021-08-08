@@ -64,7 +64,14 @@ router.get("/api/workouts/range", (req, res) => {
     res.status(400).json(err);
   });
   })
-
+  router.get("/exercise", (req, res) => {
+    res.sendFile(path.join(__dirname, "../public/exercise.html"));
+  });
+  
+  
+  router.get("/stats", (req, res) => {
+    res.sendFile(path.join(__dirname, "../public/stats.html"));
+  });
 
 router.post("/api/workouts", ({ body }, res) => {
   Workout.create(body)
@@ -108,14 +115,7 @@ router.put("/api/workouts/:id", ({ body, params}, res) => {
 //       res.status(400).json(err);
 //     });
 // });
-router.get("/exercise", (req, res) => {
-  res.sendFile(path.join(__dirname, "../public/exercise.html"));
-});
 
-
-router.get("/stats", (req, res) => {
-  res.sendFile(path.join(__dirname, "../public/stats.html"));
-});
 
 router.delete("/api/workouts", (req, res) => {
   res.end('Deleting workouts:' + req.params.id)
