@@ -19,12 +19,12 @@ day: {
   type: {
   type: String,
   trim: true,
-  required: 'Enter an exercise type',
+  required: 'Enter an exercise',
       },
   name: {
     type: String,
     trim: true,
-    required: "Enter a name for transaction"
+    required: "Enter a name for an exercise"
   },
   weight: {
     type: Number,
@@ -34,6 +34,10 @@ day: {
     type: Number,
     required: "Enter an amount"
   },
+  reps: {
+    type: Number,
+  },
+
   duration: {
     type: Number,
     required: "Enter Time"

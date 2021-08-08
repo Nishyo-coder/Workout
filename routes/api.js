@@ -85,10 +85,12 @@ router.post("/api/workouts", ({ body }, res) => {
 });
 
 router.put("/api/workouts/:id", ({ body, params }, res) => {
+  console.log({body})
   Workout.findByIdAndUpdate(params.id,
-    { $set: body },
+    { $set: { exercises:body } },
     { new: true })
     .then(dbWorkout => {
+      console.log({ dbWorkout})
       res.json(dbWorkout);
     })
     .catch(err => {
