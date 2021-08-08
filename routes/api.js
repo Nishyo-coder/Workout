@@ -30,7 +30,7 @@ router.post("/api/workouts", ({ body }, res) => {
     });
 });
 
-router.put("/api/workouts", ({ body, params}, res) => {
+router.put("/api/workouts/:id", ({ body, params}, res) => {
   Workout.findByIdAndUpdate( params.id,
    {$set: body} ,
 {new: true})
