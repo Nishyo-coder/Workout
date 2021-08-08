@@ -6,6 +6,13 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const workoutSchema = new Schema({
+  exercises: [
+  {
+  type: {
+  type: String,
+  trim: true,
+  required: 'Enter an exercise type',
+      },
   name: {
     type: String,
     trim: true,
@@ -27,9 +34,11 @@ const workoutSchema = new Schema({
   distance: {
     type: Number,
     required: "Enter distance"
-  }
+  },
+},
+  ],
 });
 
-const Workout = mongoose.model("Workout", workoutSchema);
+const Workout = mongoose.model('Workout', workoutSchema);
 
 module.exports = Workout;
