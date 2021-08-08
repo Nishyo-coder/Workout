@@ -1,5 +1,5 @@
 // The user should be able to:
-  // * Add exercises to the most recent workout plan.
+// * Add exercises to the most recent workout plan.
 // * Add new exercises to a new workout plan.
 // * View the combined weight of multiple exercises from the past seven workouts on the `stats` page.
 // * View the total duration of each workout from the past seven workouts on the `stats` page.
@@ -22,19 +22,19 @@ const Workout = require("../models/workout")
 // ] )
 
 router.get("/api/workouts", (req, res) => {
-Workout.aggregate([
-  {
-    $addFields: {
-      totalDuration: { $sum: "$exercises.duration" }
+  Workout.aggregate([
+    {
+      $addFields: {
+        totalDuration: { $sum: "$exercises.duration" }
+      },
     },
-  },
-])
-.then(dbWorkout => {
-  res.json(dbWorkout);
-})
-.catch(err => {
-  res.status(400).json(err);
-});
+  ])
+    .then(dbWorkout => {
+      res.json(dbWorkout);
+    })
+    .catch(err => {
+      res.status(400).json(err);
+    });
 })
 
 // router.get("/api/workouts", (req, res) => {
@@ -58,24 +58,24 @@ router.get("/api/workouts/range", (req, res) => {
       },
     },
   ])
-  .then(dbWorkout => {
-    res.json(dbWorkout);
-  })
-  .catch(err => {
-    res.status(400).json(err);
-  });
-  })
-  router.get("/exercise", (req, res) => {
-    res.sendFile(path.join(__dirname, "../public/exercise.html"));
-  });
-  
-  
-  router.get("/stats", (req, res) => {
-    res.sendFile(path.join(__dirname, "../public/stats.html"));
-  });
+    .then(dbWorkout => {
+      res.json(dbWorkout);
+    })
+    .catch(err => {
+      res.status(400).json(err);
+    });
+})
+router.get("/exercise", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/exercise.html"));
+});
+
+
+router.get("/stats", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/stats.html"));
+});
 
 router.post("/api/workouts", ({ body }, res) => {
-  Workout.create(body)
+  Workout.create({body})
     .then(dbWorkout => {
       res.json(dbWorkout);
     })
@@ -84,17 +84,17 @@ router.post("/api/workouts", ({ body }, res) => {
     });
 });
 
-router.put("/api/workouts/:id", ({ body, params}, res) => {
-  Workout.findByIdAndUpdate( params.id,
-   {$set: body} ,
-{new: true})
+router.put("/api/workouts/:id", ({ body, params }, res) => {
+  Workout.findByIdAndUpdate(params.id,
+    { $set: body },
+    { new: true })
     .then(dbWorkout => {
       res.json(dbWorkout);
     })
     .catch(err => {
       res.status(400).json(err);
     });
-  })
+})
 
 // router.post("/api/transaction/bulk", ({ body }, res) => {
 //   Transaction.insertMany(body)
