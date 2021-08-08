@@ -10,7 +10,7 @@ const Workout = require("../models/workout")
 
 router.get("/api/workouts", (req, res) => {
   Workout.find({})
-    .sort({ date: -1 })
+    // .sort({ date: -1 })
     .then(dbWorkout => {
       res.json(dbWorkout);
     })
@@ -18,7 +18,6 @@ router.get("/api/workouts", (req, res) => {
       res.status(400).json(err);
     });
 });
-
 
 
 router.post("/api/workouts", ({ body }, res) => {
@@ -30,6 +29,18 @@ router.post("/api/workouts", ({ body }, res) => {
       res.status(400).json(err);
     });
 });
+
+router.put("/api/workouts", ({ body, params}, res) => {
+  Workout.findByIdAndUpdate( params.id,
+   {$set: body} ,
+{new: true})
+    .then(dbWorkout => {
+      res.json(dbWorkout);
+    })
+    .catch(err => {
+      res.status(400).json(err);
+    });
+  })
 
 // router.post("/api/transaction/bulk", ({ body }, res) => {
 //   Transaction.insertMany(body)
@@ -58,6 +69,10 @@ router.get("/exercise", (req, res) => {
 
 router.get("/stats", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/stats.html"));
+});
+
+router.delete("/api/workouts", (req, res) => {
+  res.end('Deleting Workout:' + req.params.id)
 });
 
 module.exports = router;
