@@ -18,12 +18,24 @@ The user should be able to:
 
   * View the total duration of each workout from the past seven workouts on the `stats` page.
 
-Please see screenshot to preview UI: 
-
-<Homepage" src="https://user-images.githubusercontent.com/79215638/121819854-65fc7200-cc5d-11eb-8341-36c6f719eeeb.png">
-
 Please see the URL to the deployed web application below: 
-https://storybook-weddings.herokuapp.com/
+https://fierce-beach-21890.herokuapp.com/stats
+
+
+Please see screenshots to preview UI: 
+
+<Homepage" src="https://user-images.githubusercontent.com/79215638/128714313-bb84e3c7-b67d-40cc-b808-87524b9cf269.png">
+
+<Dashboard" src="https://user-images.githubusercontent.com/79215638/128714401-9d22a778-d2fd-4029-ba12-37a67a0172c2.png">
+
+Please see screenshots to preview terminal: 
+
+<CLIresistance" src="https://user-images.githubusercontent.com/79215638/128714514-07760627-ea0c-4a9f-8a9d-246a3a5fab3b.png">
+
+<CLICardio" src="https://user-images.githubusercontent.com/79215638/128714359-526fd989-b16c-4794-be1e-32b19db558aa.png">
+
+
+
 
 ## Credits
 https://mongoosejs.com/docs/api.html#aggregate_Aggregate
